@@ -19,7 +19,7 @@ const PlayerSchema = new mongoose.Schema({
     required: true,
     min: 0
   },
-  results: [playerResultModel],
+  results: [playerResultModel.schema],
   elo: {
     type: Number,
     required: true,
@@ -31,11 +31,11 @@ const PlayerSchema = new mongoose.Schema({
   }
 }, { strict: false })
 
-PlayerSchema.pre('updateOne', function (next) {
+/** PlayerSchema.pre('updateOne', function (next) {
   const updatedPlayer = this
 
   updatedPlayer.elo += updatedPlayer.results[updatedPlayer.results.length - 1].resultElo
   next()
-})
+}) */
 
 module.exports = mongoose.model('Player', PlayerSchema)
