@@ -3,15 +3,8 @@
 const Person = require('../../models/playerModel')
 
 exports.get_teams = function (req, res) {
-  const newActor = new Person({
-    name: 'hola'
-  })
-  newActor.save(function (err, actor) {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(actor)
-    }
+  res.send({
+    message: 'This is the mockup for get_teams'
   })
 }
 
