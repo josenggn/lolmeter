@@ -19,7 +19,11 @@ const PlayerSchema = new mongoose.Schema({
     required: true,
     min: 0
   },
-  results: [playerResultModel.schema],
+  results: {
+    type: [playerResultModel.schema],
+    default: [],
+    required: true
+  },
   elo: {
     type: Number,
     required: true,
@@ -28,14 +32,28 @@ const PlayerSchema = new mongoose.Schema({
   team: {
     type: Schema.Types.ObjectId,
     required: true
+  },
+  rol: {
+    type: String,
+    enum: ['TOP', 'JUNGLE', 'MID', 'ADC', 'SUPPORT']
   }
 }, { strict: false })
 
-/** PlayerSchema.pre('updateOne', function (next) {
-  const updatedPlayer = this
+PlayerSchema.pre('updateOne', async function (next) {
+  const playerToUpdate = await this.model.findOne(this.getQuery())
+  const oldElo = playerToUpdate.elo
 
-  updatedPlayer.elo += updatedPlayer.results[updatedPlayer.results.length - 1].resultElo
+  const playerResult = this._update.$push.results
+  /**
+   * Calculate and set new elo
+   * this.set({ elo: newElo })
+   *
+   */
+
   next()
-}) */
+})
 
+function calculateResultElo (result, player) {
+
+}
 module.exports = mongoose.model('Player', PlayerSchema)
