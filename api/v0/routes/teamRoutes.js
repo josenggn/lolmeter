@@ -3,7 +3,7 @@ const router = require('express').Router()
 const teams = require('../controllers/teamController')
 
 /**
- * Gets all teams / Create a team
+ * Gets all teams / Creates a team
  *
  * @section teams
  * @type get post
