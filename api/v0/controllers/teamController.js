@@ -1,17 +1,10 @@
 'use strict'
 
-const Person = require('../../models/playerModel')
+const Team = require('../../models/teamModel')
 
 exports.get_teams = function (req, res) {
-  const newActor = new Person({
-    name: 'hola'
-  })
-  newActor.save(function (err, actor) {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(actor)
-    }
+  res.send({
+    message: 'This is the mockup for get_teams'
   })
 }
 
